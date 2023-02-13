@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "07b96fc2-899c-4e30-a80e-7c7796163a47",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25141768"
+	},
+	"item": [
+		{
+			"name": "CreatNewOrgnaization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(pm.response.json().id)\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"OrganizationID\",\r",
+							"pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/organizations?displayName={rana}&key={{APIKey}}&token={{token }}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"organizations"
+					],
+					"query": [
+						{
+							"key": "displayName",
+							"value": "{rana}"
+						},
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetMemberId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"console.log(pm.response.json().id)\r",
+							"\r",
+							"pm.collectionVariables.set(\"MemberID\",\r",
+							"pm.response.json().id);\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/members/me?key={{APIKey}}&token={{token }}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"members",
+						"me"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrgForMember",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/members/{{MemberID}}/organizations?key={{APIKey}}&token={{token }}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"members",
+						"{{MemberID}}",
+						"organizations"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBoard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.collectionVariables.set(\"BoardID\", \r",
+							"pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseURL}}1/boards/?name={rana_board}&key={{APIKey}}&token={{token }}&idOrganization={{OrganizationID}}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{rana_board}"
+						},
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						},
+						{
+							"key": "idOrganization",
+							"value": "{{OrganizationID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBoardsInOrganization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/organizations/{{OrganizationID}}/boards?key={{APIKey}}&token={{token }}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"organizations",
+						"{{OrganizationID}}",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAnewList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.collectionVariables.set(\"ListID\", \r",
+							"pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/lists?name={myList}&idBoard={{BoardID}}&key={{APIKey}}&token={{token }}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "{myList}"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{BoardID}}"
+						},
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetListsOnABoard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/boards/{{BoardID}}/lists?key={{APIKey}}&token={{token }}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"boards",
+						"{{BoardID}}",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ArchiveAList",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/lists/{{ListID}}/closed?key={{APIKey}}&token={{token }}&value=true",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"lists",
+						"{{ListID}}",
+						"closed"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						},
+						{
+							"key": "value",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteBoard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/boards/{{BoardID}}?key={{APIKey}}&token={{token }}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"boards",
+						"{{BoardID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteOrganization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BaseURL}}1/organizations/{{OrganizationID}}?key={{APIKey}}&token={{token }}",
+					"host": [
+						"{{BaseURL}}1"
+					],
+					"path": [
+						"organizations",
+						"{{OrganizationID}}"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{APIKey}}"
+						},
+						{
+							"key": "token",
+							"value": "{{token }}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "MemberID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "OrganizationID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "BoardID",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "ListID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
